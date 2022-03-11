@@ -140,9 +140,6 @@ export function Layout(props) {
                                 <MarkEmailReadIcon />
                             </Badge>
                         </IconButton>
-                        <Button onClick={() => {window.location='/'}} color="inherit">
-                            Logout
-                        </Button>
                     </Toolbar>
                 </AppBar>
                 <Drawer variant="permanent" open={open}>
