@@ -6,7 +6,7 @@ export function Vendors() {
 
     return (
         <Layout
-            title='Moxie Vendors'
+            title='Moxie Print Vendors'
             content={content}
         />
     )

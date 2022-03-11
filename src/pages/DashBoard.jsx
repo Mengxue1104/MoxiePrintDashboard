@@ -6,7 +6,7 @@ export function DashBoard() {
 
     return (
         <Layout 
-            title='Moxie Dashboard'
+            title='Moxie Print Dashboard'
             content={content}
         />
     )
