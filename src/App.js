@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { Login } from './pages/Login'
 import { DashBoard } from './pages/DashBoard'
-import { Products } from "./pages/Products";
+import { Vendors } from "./pages/Vendors";
 import { PageNotFound } from './pages/PageNotFound'
 
 import './App.scss'
@@ -17,7 +17,7 @@ export default function App() {
                 <Route exact path="/" element={<Login />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={<DashBoard />} />
-                <Route path="/products" element={<Products />} />
+                <Route path="/vendors" element={<Vendors />} />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
         </BrowserRouter>
