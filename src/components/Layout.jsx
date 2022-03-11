@@ -19,6 +19,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 import { mainListItems, secondaryListItems } from '../components/DashboardListItems';
+import MarkEmailReadIcon from '@mui/icons-material/MarkEmailRead';
 
 function Copyright(props) {
     return (
@@ -132,6 +133,11 @@ export function Layout(props) {
                         <IconButton color="inherit">
                             <Badge badgeContent={1} color="secondary">
                                 <NotificationsIcon />
+                            </Badge>
+                        </IconButton>
+                        <IconButton color="inherit">
+                            <Badge badgeContent={0} color="secondary">
+                                <MarkEmailReadIcon />
                             </Badge>
                         </IconButton>
                         <Button onClick={() => {window.location='/'}} color="inherit">
