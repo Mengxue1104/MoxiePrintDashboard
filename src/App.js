@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Login } from './pages/Login'
 import { DashBoard } from './pages/DashBoard'
 import { Vendors } from "./pages/Vendors";
@@ -9,8 +9,6 @@ import './App.scss'
 
 
 export default function App() {
-    var user = localStorage.getItem("user")
-
     return (
         <BrowserRouter>
             <Routes>

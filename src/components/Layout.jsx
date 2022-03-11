@@ -116,7 +116,7 @@ export function Layout(props) {
                             noWrap
                             sx={{ flexGrow: 1 }}
                         >
-                            <img src='/moxieprintLogo.png' />
+                            <img src='/moxieprintLogo.png' alt='Moxie Print'/>
                             {props.title}
                         </Typography>
                         <IconButton color="inherit">
