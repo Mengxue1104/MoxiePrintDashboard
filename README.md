@@ -1,50 +1,20 @@
-# Assignment 2 - ReactLoginScreen
+# Assignment 2 - React Firebase Dashboard
 
 > **Mengxue Chen**
 
 Fllow the instructions of 2008 Practical 2 -React Firebase Dashboard Due March 11th, 2022.
 
-
-# Moxie Print
 ## General
- This is the dashboard of Moxie Print, a store of Stationery. It contains an app-bar, sidebar and widget display area. 
+ This is the login screen of Moxie Print dashboard. It contains an email, password field and a sign in button. 
 
-## Data
-Use the Firebase Real Time Database to save all the data of storefront. Thera are four data points and two requird data.
+## Login
+Use the Firebase Real Time Database to save the user data. 
 
-> **Key from firebase**
+> **email: mchen24@nait.ca**
 
-> **Product SKU**
-
-> **Product Image**
-
-> **Product Title**
-
-> **Product Price**
-
-> **Product Description**
-
-## CRUD
-### `Add`
-Add product via the left top conner Add Product button.
-
-### `Read`
-Read data from the Firebase Real Time Database.
-
-### `Update`
-Update the current data by using Edit button.
-
-### `Delete`
-Remove the current card by using Delete button.
+> **password: 1234567**
 
 
 ## Start
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `npm install react-router-dom@6`
+To install React Router, all you have to do is run npm install react-router-dom@6 in your project terminal and then wait for the installation to complete.
