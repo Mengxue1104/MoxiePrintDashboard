@@ -10,9 +10,9 @@ Fllow the instructions of 2008 Practical 2 -React Firebase Dashboard Due March 1
 ## Login
 Use the Firebase Real Time Database to save the user data. 
 
-> **email: mchen24@nait.ca**
+> **email: jim@home.com**
 
-> **password: 1234567**
+> **password: 123456**
 
 
 ## Start
