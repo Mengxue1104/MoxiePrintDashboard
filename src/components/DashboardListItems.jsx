@@ -15,7 +15,6 @@ import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import HearingIcon from '@mui/icons-material/Hearing';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { signOut } from 'firebase/auth';
 
 export const mainListItems = (
     <React.Fragment>
