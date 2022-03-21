@@ -7,10 +7,25 @@ import { auth } from 'libs/firebase'
 
 export function DashBoard() {
     const content = <p>DashBoard Contents</p>
-    return (
-        <Layout 
-            title='Moxie Print Dashboard'
-            content={content}
-        />
-    )
+    const [isUser, setIsUser] = useState(false)
+    const navigator = useNavigate();
+        onAuthStateChanged(auth, (user) => {
+            if(user){
+                setIsUser(true)
+            }else {
+                setIsUser(false)
+                //login page
+                navigator('/')
+            }
+        })
+        if(isUser){
+            return (
+                <Layout 
+                    title='Moxie Print Dashboard'
+                    content={content}
+                />
+            )
+        } else {
+            return null
+        }
 }
