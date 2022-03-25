@@ -6,7 +6,7 @@ export function PageNotFound(props) {
         <>
             <Grid container component="main" sx={{ height: '100vh' }} alignItems="center" justifyContent="center">
                 <div class="number">404</div>
-                <div class="text"><span>Ooops...</span><br />page not found</div>
+                <div class="text">Moxie Print:<br /><span>Ooops...</span><br />page not found</div>
             </Grid>
         </>
     )
