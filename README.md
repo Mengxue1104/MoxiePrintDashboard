@@ -1,4 +1,4 @@
-# Assignment 2 - React Firebase Dashboard
+Moxie Print Dashboard
 
 > **Mengxue Chen**
 
