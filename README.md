@@ -1,6 +1,4 @@
 # Moxie Print Dashboard
-
-## General
  This is the login screen of Moxie Print dashboard. It contains an email, password field and a sign in button. 
 
 ## Login
