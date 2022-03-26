@@ -21,8 +21,8 @@ export function AddProduct({ title, ...props }) {
 
     useEffect(() => {
         fetchData()
-    }, [])
-
+    })
+    
     const fetchData = async () => {
         const product = ref(db, '/product')
         const productSnapShot = await get(product)
@@ -30,7 +30,6 @@ export function AddProduct({ title, ...props }) {
         const products = Object.keys(productData).map(k => {
             return productData[k]
         })
-
 
         const productRec = products.filter(p => p.key === key)
         if (productRec.length > 0) {
