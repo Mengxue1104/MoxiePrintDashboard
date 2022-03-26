@@ -19,6 +19,7 @@ export default function App() {
                 <Route path="/dashboard" element={<DashBoard />}>
                     <Route index element={<AllProducts title="All Products" />} />
                     <Route path="add" element={<AddProduct title="Add New Product" />} />
+                    <Route path="edit/:key" element={<AddProduct title="Edit Product" />} />
                 </Route>
                 <Route path="/vendors" element={<Vendors />} />
                 <Route path="*" element={<PageNotFound />} />

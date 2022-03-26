@@ -4,6 +4,8 @@ import { get, ref, update } from 'firebase/database';
 import { Card, CardHeader, CardMedia, CardContent, Typography, Container, Grid, IconButton, Menu, MenuItem, Button } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { useNavigate } from 'react-router-dom'
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export function AllProducts({ title, ...props }) {
     const [productList, setProductList] = useState([])
@@ -42,7 +44,7 @@ export function AllProducts({ title, ...props }) {
 
     //edit button
     const handleEdit = async (key) => {
-
+        navigator(`/dashboard/edit/${key}`)
     }
 
     const handleClick = (e) => {
@@ -68,22 +70,20 @@ export function AllProducts({ title, ...props }) {
                             <Card sx={{ width: 345 }} variant="outlined">
                                 <CardHeader
                                     action={
-                                        <IconButton aria-label="settings" onClick={handleClick}>
-                                            <MoreVertIcon />
-                                        </IconButton>
+                                        <>
+                                            <IconButton aria-label="edit" onClick={() => handleEdit(p.key)}>
+                                                <EditIcon  />
+                                            </IconButton>
+                                            <IconButton aria-label="delete" onClick={() => handleDelete(p.key)}>
+                                                <DeleteIcon  />
+                                            </IconButton>
+                                        </>
                                     }
                                     title={p.title}
                                     subheader={`$${parseFloat(p.price).toFixed(2)}`}
                                 />
-                                <Menu
-                                    id="simple-menu"
-                                    anchorEl={anchorEl}
-                                    open={Boolean(anchorEl)}
-                                    onClose={handleClose}
-                                >
-                                    <MenuItem onClick={() => handleEdit(p.key)}>Edit</MenuItem>
-                                    <MenuItem onClick={() => handleDelete(p.key)}>Delete</MenuItem>
-                                </Menu>
+
+
                                 <CardMedia
                                     component="img"
                                     height="194"
