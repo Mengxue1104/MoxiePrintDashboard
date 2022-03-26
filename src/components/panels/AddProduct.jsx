@@ -147,7 +147,7 @@ export function AddProduct({ title, ...props }) {
                         onChange={onImageChange}
                     />
                 </FormControl>
-                {image && <img src={image} alt="preview image" style={{ maxWidth: '100%', maxHeight: '600px' }} />}
+                {image && <img src={image} alt="preview" style={{ maxWidth: '100%', maxHeight: '600px' }} />}
 
                 <Stack spacing={2} direction="row" justifyContent="flex-end">
                     <Button variant="contained" type="submit" onClick={save}>Save</Button>
