@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { db } from "../../libs/firebase";
 import { get, ref, update } from 'firebase/database';
-import { Card, CardHeader, CardMedia, CardContent, Typography, Container, Grid, IconButton, Menu, MenuItem, Button } from '@mui/material';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Card, CardHeader, CardMedia, CardContent, Typography, Container, Grid, IconButton, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 export function AllProducts({ title, ...props }) {
     const [productList, setProductList] = useState([])
-    const [anchorEl, setAnchorEl] = useState(null)
     const navigator = useNavigate();
 
     useEffect(() => {
@@ -45,14 +43,6 @@ export function AllProducts({ title, ...props }) {
     //edit button
     const handleEdit = async (key) => {
         navigator(`/dashboard/edit/${key}`)
-    }
-
-    const handleClick = (e) => {
-        setAnchorEl(e.currentTarget)
-    }
-
-    const handleClose = () => {
-        setAnchorEl(null)
     }
 
     return (
