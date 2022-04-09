@@ -22,10 +22,6 @@ export function AddProduct({ title, ...props }) {
     const { key } = useParams()
 
     useEffect(() => {
-        fetchData()
-    }, [])
-
-    const fetchData = async () => {
         const product = ref(db, '/product')
         const productSnapShot = await get(product)
         const productData = { ...productSnapShot.val() }
@@ -40,7 +36,24 @@ export function AddProduct({ title, ...props }) {
         }
 
         setIsRendered(true)
-    }
+    }, [])
+
+    // const fetchData = async () => {
+    //     const product = ref(db, '/product')
+    //     const productSnapShot = await get(product)
+    //     const productData = { ...productSnapShot.val() }
+    //     const products = Object.keys(productData).map(k => {
+    //         return productData[k]
+    //     })
+
+    //     const productRec = products.filter(p => p.key === key)
+    //     if (productRec.length > 0) {
+    //         setProduct(productRec[0])
+    //         setImage(productRec[0].image)
+    //     }
+
+    //     setIsRendered(true)
+    // }
 
     const handleChange = (prop) => (event) => {
         setProduct({ ...product, [prop]: event.target.value })

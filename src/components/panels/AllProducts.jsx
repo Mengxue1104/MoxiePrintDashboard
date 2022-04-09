@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { db } from "../../libs/firebase";
-import { get, ref, update } from 'firebase/database';
+import { ref, update } from 'firebase/database';
 import { Card, CardHeader, CardMedia, CardContent, Typography, Container, Grid, IconButton, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom'
 import EditIcon from '@mui/icons-material/Edit';
