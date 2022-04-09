@@ -38,7 +38,7 @@ export function AddProduct({ title, ...props }) {
             setIsRendered(true)
         }
         fetchData();
-    }, [])
+    }, [key])
 
     const handleChange = (prop) => (event) => {
         setProduct({ ...product, [prop]: event.target.value })
