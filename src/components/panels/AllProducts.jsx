@@ -5,26 +5,15 @@ import { Card, CardHeader, CardMedia, CardContent, Typography, Container, Grid, 
 import { useNavigate } from 'react-router-dom'
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useGetProducts } from '../../hooks/useGetAllProducts'
 
 export function AllProducts({ title, ...props }) {
-    const [productList, setProductList] = useState([])
+    const productList = useGetProducts()
     const navigator = useNavigate();
 
     useEffect(() => {
-        fetchData()
+        
     }, [])
-
-    //get data
-    const fetchData = async () => {
-        const product = ref(db, '/product')
-        const productSnapShot = await get(product)
-        const productData = { ...productSnapShot.val() }
-        const products = Object.keys(productData).map(k => {
-            return productData[k]
-        })
-
-        setProductList(products)
-    }
 
     //delete button
     const handleDelete = async (key) => {
@@ -32,7 +21,7 @@ export function AllProducts({ title, ...props }) {
             const updates = {};
             updates['/product/' + key] = null;
             update(ref(db), updates);
-            fetchData()
+            //fetchData()
         }
     }
 
@@ -55,7 +44,7 @@ export function AllProducts({ title, ...props }) {
 
             <Container>
                 <Grid container spacing={2}>
-                    {productList.map((p, k) => {
+                    {productList ? productList.map((p, k) => {
                         return p.key && <Grid item xl={4} key={k}>
                             <Card sx={{ width: 345 }} variant="outlined">
                                 <CardHeader
@@ -87,7 +76,7 @@ export function AllProducts({ title, ...props }) {
                                 </CardContent>
                             </Card>
                         </Grid>
-                    })}
+                    }) : null}
                 </Grid>
             </Container>
         </>

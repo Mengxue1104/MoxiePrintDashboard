@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FormControl, Button, Stack, TextField } from '@mui/material';
+import { FormControl, Button, Stack, TextField, Grid, CardHeader, CardContent, Typography, Card, CardMedia, Alert } from '@mui/material';
 import { db } from "../../libs/firebase";
 import { ref as storageRef, uploadBytes, getDownloadURL, getStorage } from "firebase/storage";
 import { get, ref, push, set, update } from 'firebase/database';
@@ -15,14 +15,16 @@ export function AddProduct({ title, ...props }) {
     const [image, setImage] = useState(null)
     const [file, setFile] = useState("")
     const [isRendered, setIsRendered] = useState(false)
+    const [saved, setSaved] = useState(false)
+    const [uploading, setUploading] = useState(false)
 
     const navigator = useNavigate();
     const { key } = useParams()
 
     useEffect(() => {
         fetchData()
-    })
-    
+    }, [])
+
     const fetchData = async () => {
         const product = ref(db, '/product')
         const productSnapShot = await get(product)
@@ -45,6 +47,9 @@ export function AddProduct({ title, ...props }) {
     }
 
     const save = async () => {
+        setSaved(true)
+        setUploading(true)
+
         const dataRef = ref(db, 'product');
         let urlPath = ""
 
@@ -83,7 +88,7 @@ export function AddProduct({ title, ...props }) {
         }
 
 
-        navigator('/dashboard')
+        setUploading(false)
     }
 
     const onImageChange = (event) => {
@@ -98,61 +103,112 @@ export function AddProduct({ title, ...props }) {
         }
     }
 
+    const addAnother = () => {
+        setSaved(false); 
+        setUploading(false); 
+        setProduct({
+            title: '',
+            custom: '',
+            image: '',
+            price: 0
+        })
+        setImage(null)
+        navigator('/dashboard/add')
+    }
     return (
         <>
-            {isRendered && <>
+            {isRendered && !saved ? <>
                 <h2>{title}</h2>
-                <FormControl fullWidth sx={{ m: 1 }}>
-                    <TextField
-                        variant="filled"
-                        required
-                        label="Title"
-                        value={product.title}
-                        onChange={handleChange('title')}
-                    />
-                </FormControl>
+                <Grid container spacing={2}>
+                    <Grid item xs={8}>
+                        <FormControl fullWidth sx={{ m: 1 }}>
+                            <TextField
+                                variant="filled"
+                                required
+                                label="Title"
+                                value={product.title}
+                                onChange={handleChange('title')}
+                            />
+                        </FormControl>
 
-                <FormControl fullWidth sx={{ m: 1 }}>
-                    <TextField
-                        variant="filled"
-                        required
-                        label="Description"
-                        value={product.custom}
-                        onChange={handleChange('custom')}
-                    />
-                </FormControl>
+                        <FormControl fullWidth sx={{ m: 1 }}>
+                            <TextField
+                                variant="filled"
+                                required
+                                label="Description"
+                                value={product.custom}
+                                onChange={handleChange('custom')}
+                            />
+                        </FormControl>
 
-                <FormControl fullWidth sx={{ m: 1 }}>
-                    <TextField
-                        variant="filled"
-                        required
-                        label="Price"
-                        type="number"
-                        InputProps={{
-                            inputProps: {
-                                min: 0,
-                                step: 0.01
-                            }
-                        }}
-                        value={parseFloat(product.price).toFixed(2)}
-                        onChange={handleChange('price')}
-                    />
-                </FormControl>
+                        <FormControl fullWidth sx={{ m: 1 }}>
+                            <TextField
+                                variant="filled"
+                                required
+                                label="Price"
+                                type="number"
+                                InputProps={{
+                                    inputProps: {
+                                        min: 0,
+                                        step: 0.01
+                                    }
+                                }}
+                                value={product.price}
+                                onChange={handleChange('price')}
+                            />
+                        </FormControl>
 
-                <FormControl fullWidth sx={{ m: 1 }}>
-                    <TextField
-                        required
-                        type='file'
-                        onChange={onImageChange}
-                    />
-                </FormControl>
-                {image && <img src={image} alt="preview" style={{ maxWidth: '100%', maxHeight: '600px' }} />}
+                        <FormControl fullWidth sx={{ m: 1 }}>
+                            <TextField
+                                required
+                                type='file'
+                                onChange={onImageChange}
+                            />
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={4}>
+                        <Card sx={{ width: 345 }} variant="outlined">
+                            <CardHeader
+                                title={product.title}
+                                subheader={`$${parseFloat(product.price).toFixed(2)}`}
+                            />
+                            <CardMedia
+                                component="img"
+                                height="194"
+                                image={image ?? '/default-placeholder.jpg'}
+                                alt="product img"
+                            />
+                            <CardContent>
+                                <Typography variant="body2" color="text.secondary">
+                                    {product.custom}
+                                </Typography>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                </Grid>
+
+
 
                 <Stack spacing={2} direction="row" justifyContent="flex-end">
                     <Button variant="contained" type="submit" onClick={save}>Save</Button>
                     <Button variant="secondary" onClick={() => navigator('/dashboard')}>Cancel</Button>
                 </Stack>
-            </>}
+            </> :
+                <>
+                    {uploading ?
+                        <>
+                            <Alert severity="info">Uploading Product ...</Alert>
+                        </> :
+                        <>
+                            <Alert severity="success">Uploaded Successfully!</Alert>
+                            <Stack direction="row" spacing={2}>
+                                <Button variant="contained" color="success" onClick={() => { addAnother() }}>Add Another Product</Button>
+                                <Button variant="contained" color="secondary" onClick={() => navigator('/dashboard')}>
+                                    View All Products
+                                </Button>
+                            </Stack>
+                        </>}
+                </>}
         </>
     )
 }
