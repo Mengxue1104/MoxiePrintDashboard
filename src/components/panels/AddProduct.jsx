@@ -21,39 +21,24 @@ export function AddProduct({ title, ...props }) {
     const navigator = useNavigate();
     const { key } = useParams()
 
-    useEffect(async() => {
-        const product = ref(db, '/product')
-        const productSnapShot = await get(product)
-        const productData = { ...productSnapShot.val() }
-        const products = Object.keys(productData).map(k => {
-            return productData[k]
-        })
+    useEffect(() => {
+        async function fetchData() {
+            const product = ref(db, '/product')
+            const productSnapShot = await get(product)
+            const productData = { ...productSnapShot.val() }
+            const products = Object.keys(productData).map(k => {
+                return productData[k]
+            })
 
-        const productRec = products.filter(p => p.key === key)
-        if (productRec.length > 0) {
-            setProduct(productRec[0])
-            setImage(productRec[0].image)
+            const productRec = products.filter(p => p.key === key)
+            if (productRec.length > 0) {
+                setProduct(productRec[0])
+                setImage(productRec[0].image)
+            }
+            setIsRendered(true)
         }
-
-        setIsRendered(true)
+        fetchData();
     }, [])
-
-    // const fetchData = async () => {
-    //     const product = ref(db, '/product')
-    //     const productSnapShot = await get(product)
-    //     const productData = { ...productSnapShot.val() }
-    //     const products = Object.keys(productData).map(k => {
-    //         return productData[k]
-    //     })
-
-    //     const productRec = products.filter(p => p.key === key)
-    //     if (productRec.length > 0) {
-    //         setProduct(productRec[0])
-    //         setImage(productRec[0].image)
-    //     }
-
-    //     setIsRendered(true)
-    // }
 
     const handleChange = (prop) => (event) => {
         setProduct({ ...product, [prop]: event.target.value })
@@ -117,8 +102,8 @@ export function AddProduct({ title, ...props }) {
     }
 
     const addAnother = () => {
-        setSaved(false); 
-        setUploading(false); 
+        setSaved(false);
+        setUploading(false);
         setProduct({
             title: '',
             custom: '',
