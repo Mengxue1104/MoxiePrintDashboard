@@ -21,7 +21,7 @@ export function AddProduct({ title, ...props }) {
     const navigator = useNavigate();
     const { key } = useParams()
 
-    useEffect(() => {
+    useEffect(async() => {
         const product = ref(db, '/product')
         const productSnapShot = await get(product)
         const productData = { ...productSnapShot.val() }
